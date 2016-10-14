@@ -94,7 +94,7 @@ dialogue = input("Enter dialogue to be searched: \n")
 resultList = []
 
 for filename in os.listdir('tempSubs'):
-    if dialogue in open('tempSubs/' + filename).read():
+    if dialogue in open('tempSubs\\' + filename).read():
         resultList.append(filename)
 
 if os.path.exists('tempSubs'):
