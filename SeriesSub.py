@@ -4,13 +4,13 @@ import requests
 import zipfile
 import os
 import shutil
-import ctypes
+#import ctypes
 from bs4 import BeautifulSoup
 
 from google import search
 
 
-ctypes.windll.user32.MessageBoxW(0, "Enter series to be searched:", "User Input yo", 1)
+#ctypes.windll.user32.MessageBoxW(0, "Enter series to be searched:", "User Input yo", 1)
 
 series = input("Enter series to be searched: \n")
 
@@ -106,9 +106,12 @@ dialogue = input("Enter dialogue to be searched: \n")
 resultList = []
 
 for filename in os.listdir('tempSubs'):
-    print(filename)
-    if dialogue.lower() in open('tempSubs\\' + filename).read().lower():
-        resultList.append(filename)
+    #print(filename)
+    try:
+        if dialogue.lower() in open('tempSubs\\' + filename).read().lower():
+                resultList.append(filename)
+    except:
+        print ("error in previous search in "+filename)
 
 if os.path.exists('tempSubs'):
     shutil.rmtree('tempSubs')
