@@ -4,10 +4,13 @@ import requests
 import zipfile
 import os
 import shutil
+import ctypes
 from bs4 import BeautifulSoup
 
 from google import search
 
+
+ctypes.windll.user32.MessageBoxW(0, "Enter series to be searched:", "User Input yo", 1)
 
 series = input("Enter series to be searched: \n")
 
@@ -45,6 +48,12 @@ finalurl=''
 for url in search('insite: tvsubtitles.net ' + series + ' show', stop=1,num=2):
         finalurl = url
         break
+
+if(finalurl.find("subtitle") != -1):
+    start = finalurl.find("-");
+    kk= finalurl[start+1:]
+    end = finalurl[start+1:].find("-")
+    finalurl = "http://www.tvsubtitles.net/tvshow-"+finalurl[start+1:start+end+1]+"-1.html";
 print(finalurl)
 
 
@@ -87,20 +96,22 @@ for k in subURLList:
     i+=1
 
 
-
+#Remove downloaded sub zip files
+filelist = [ f for f in os.listdir("tempSubs") if f.endswith(".zip") ]
+for f in filelist:
+    os.remove("tempSubs\\"+f)
 
 dialogue = input("Enter dialogue to be searched: \n")
 
 resultList = []
 
 for filename in os.listdir('tempSubs'):
-    if dialogue in open('tempSubs\\' + filename).read():
+    print(filename)
+    if dialogue.lower() in open('tempSubs\\' + filename).read().lower():
         resultList.append(filename)
 
 if os.path.exists('tempSubs'):
     shutil.rmtree('tempSubs')
-    #os.remove('tempSubs')
-    #os.removedirs('tempSubs')
 
 print("The episodes in which entered dialogue occurs are: " + str(resultList))
 
