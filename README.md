@@ -9,6 +9,6 @@ Enter series to be searched:
 sunny
 
 Enter dialogue to be searched: 
-ronald
+Jim Jones
 
-(Now in error)
+The episodes in which entered dialogue occurs are: ['It s Always Sunny in Philadelphia - 2x07 - The Gang Exploits A Miracle.DVDRip.en.srt']
